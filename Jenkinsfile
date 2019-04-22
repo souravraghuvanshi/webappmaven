@@ -39,7 +39,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line 
          app = docker.build("sanyambatra13/maven-demo") */
-         sh 'sudo docker build -t jenkins-webapp:ver1 .'
+         sh 'sudo docker build -t sourav-jenkins-webapp:ver1 .'
      }
 
      stage('Push image') 
@@ -54,15 +54,16 @@ node {
             sudo app.push("${env.BUILD_NUMBER}")
             sudo app.push("latest")*/
             
-            withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: "DockerPass", usernameVariable: "DockerUser")]) {
+           withCredentials([usernamePassword(credentialsId: 'docker-hub-raghuvanshi', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {
     // some block
-    
-    
-    
-     sh "sudo docker login -u $DockerUser -p $DockerPass"
-            sh 'sudo docker tag jenkins-webapp:ver1 sanyambatra13/jenkins-webappjenkins-webapp:ver1'
-            sh ' sudo docker push sanyambatra13/jenkins-webapp:ver1'
-            sh 'sudo docker run sanyambatra13/jenkins-webapp:ver1'
+// some block
+
+
+
+sh "sudo docker login -u $dockeruser -p $dockerpass"
+sh 'sudo docker tag sourav-jenkins-webapp:ver1 souravraghuvanshi/sourav-jenkins-webapp:ver1'
+sh ' sudo docker push souravraghuvanshi/sourav-jenkins-webapp:ver1'
+
 }
             
             
