@@ -38,7 +38,7 @@ node {
   stage('Build Docker image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line 
-         app = docker.build("sanyambatra13/maven-demo") */
+          */
          sh 'sudo docker build -t sourav-jenkins-webapp:ver1 .'
      }
 
