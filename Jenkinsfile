@@ -21,17 +21,18 @@ node {
     }
 
     stage ('Exec Maven') {
-      //  rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
+    
+       rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
     }
 
     stage ('Publish build info') {
         server.publishBuildInfo buildInfo
     }
      stage('SonarQube analysis') {
-       //  mvnHome = tool 'mavenhome'
-  //  withSonarQubeEnv('sonar') {
-      // requires SonarQube Scanner for Maven 3.2+
-    //  rtMaven.run pom: 'pom.xml', goals: 'clean package sonar:sonar', buildInfo: buildInfo
+         mvnHome = tool 'mavenhome'
+    withSonarQubeEnv('sonar') {
+  //     requires SonarQube Scanner for Maven 3.2+
+       rtMaven.run pom: 'pom.xml', goals: 'clean package sonar:sonar', buildInfo: buildInfo
     }
      } 
   
