@@ -32,8 +32,8 @@ node {
       //   mvnHome = tool 'mavenhome'
     //withSonarQubeEnv('sonar') {
   //     requires SonarQube Scanner for Maven 3.2+
-  //     rtMaven.run pom: 'pom.xml', goals: 'clean package sonar:sonar', buildInfo: buildInfo
-    }
+  //    rtMaven.run pom: 'pom.xml', goals: 'clean package sonar:sonar', buildInfo: buildInfo
+   // }
      } 
   
   stage('Build Docker image') {
