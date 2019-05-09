@@ -69,9 +69,9 @@ sh ' sudo docker push souravraghuvanshi/sourav-jenkins-webapp:ver1'
    stage('Build') {
     
 
-         bat(/terraform init/)
+         sh 'terraform init'
          withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'SouravAWS', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        bat (/terraform apply -auto-approve/)
+        sh 'terraform apply -auto-approve'
   
 
       }
