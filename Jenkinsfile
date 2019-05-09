@@ -7,8 +7,8 @@ node {
     
              sh 'ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-208-252-33.compute-1.amazonaws.com'
                 sh 'ssh -o  ubuntu@ec2-18-208-252-33.compute-1.amazonaws.com uptime'
-             sh 'sudo ubuntu@ec2-18-208-252-33.compute-1.amazonaws.com docker pull souravraghuvanshi/sourav-jenkins-webapp:ver1'  
-             sh 'sudo ubuntu@ec2-18-208-252-33.compute-1.amazonaws.com docker run -d -p 8888:8888 souravraghuvanshi/sourav-jenkins-webapp:ver1'
+             sh 'sudo  docker pull souravraghuvanshi/sourav-jenkins-webapp:ver1'  
+             sh 'sudo  docker run -d -p 8888:8888 souravraghuvanshi/sourav-jenkins-webapp:ver1'
             }     
             
         }       
