@@ -70,7 +70,8 @@ sh ' sudo docker push souravraghuvanshi/sourav-jenkins-webapp:ver1'
     
 
          sh 'terraform init'
-         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'SouravAWS', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'SouravAWS', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']])
+       {
         sh 'terraform apply -auto-approve'
   
 
@@ -78,7 +79,8 @@ sh ' sudo docker push souravraghuvanshi/sourav-jenkins-webapp:ver1'
    }
                                  
                                  
-                                 stage('connection') {           
+           stage('connection') {   
+               
         sshagent(['e9918d51-4fe9-4566-a544-4ebb33619bdd']) {
     
              sh 'ssh -o  ubuntu@ec2-18-208-252-33.compute-1.amazonaws.com '
@@ -97,5 +99,5 @@ sh ' sudo docker push souravraghuvanshi/sourav-jenkins-webapp:ver1'
             
             
             
-        }
-    }
+        
+    
