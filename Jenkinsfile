@@ -64,7 +64,7 @@ node {
 sh "sudo docker login -u $dockeruser -p $dockerpass"
 sh 'sudo docker tag sourav-jenkins-webapp:ver1 souravraghuvanshi/sourav-jenkins-webapp:ver1'
 sh ' sudo docker push souravraghuvanshi/sourav-jenkins-webapp:ver1'
-
+           }
 }
    stage('Build') {
     
