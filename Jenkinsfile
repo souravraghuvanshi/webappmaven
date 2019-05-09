@@ -24,7 +24,7 @@ node {
     
        rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
     }
-*/
+
     stage ('Publish build info') {
         server.publishBuildInfo buildInfo
     }
@@ -34,7 +34,7 @@ node {
      //  requires SonarQube Scanner for Maven 3.2+
       rtMaven.run pom: 'pom.xml', goals: 'clean package sonar:sonar', buildInfo: buildInfo
     }
-     } 
+     } */
   
   stage('Build Docker image') {
         /* This builds the actual image; synonymous to
