@@ -81,11 +81,11 @@ sh ' sudo docker push souravraghuvanshi/sourav-jenkins-webapp:ver1'
                
         sshagent(['SouravSec']) {
     
-             sh 'ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-208-252-33.compute-1.amazonaws.com'
-          //  sh 'ssh ubuntu@ec2-18-208-252-33.compute-1.amazonaws.com sudo docker stop sourav'
-          // sh 'ssh ubuntu@ec2-18-208-252-33.compute-1.amazonaws.com sudo docker rm sourav'
-             sh 'ssh ubuntu@ec2-18-208-252-33.compute-1.amazonaws.com sudo docker pull souravraghuvanshi/sourav-jenkins-webapp:ver1'  
-             sh 'ssh ubuntu@ec2-18-208-252-33.compute-1.amazonaws.com sudo docker run -d -p 8888:8888 --name=sourav souravraghuvanshi/sourav-jenkins-webapp:ver1'
+             sh 'ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-234-154-79.compute-1.amazonaws.com'
+          //  sh 'ssh ubuntu@ec2-18-234-154-79.compute-1.amazonaws.com sudo docker stop sourav'
+          // sh 'ssh ubuntu@ec2-18-234-154-79.compute-1.amazonaws.com sudo docker rm sourav'
+             sh 'ssh ubuntu@ec2-18-234-154-79.compute-1.amazonaws.com sudo docker pull souravraghuvanshi/sourav-jenkins-webapp:ver1'  
+             sh 'ssh ubuntu@ec2-18-234-154-79.compute-1.amazonaws.com sudo docker run -d -p 8888:8888 --name=sourav souravraghuvanshi/sourav-jenkins-webapp:ver1'
             }      
             
         }       
