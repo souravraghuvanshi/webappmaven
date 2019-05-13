@@ -1,40 +1,24 @@
+resource "aws_ecs_service" "mongo" {
+  name            = "mongodb"
+  cluster         = "${aws_ecs_cluster.foo.id}"
+  task_definition = "${aws_ecs_task_definition.mongo.arn}"
+  desired_count   = 3
+  iam_role        = "${aws_iam_role.foo.arn}"
+  depends_on      = ["aws_iam_role_policy.foo"]
 
-resource "aws_cloudwatch_log_group" "souravraghuvanshi/sourav-jenkins-webapp:ver1" {
-  name              = "souravraghuvanshi/sourav-jenkins-webapp:ver1"
-  retention_in_days = 1
-}
-
-resource "aws_ecs_task_definition" "souravraghuvanshi/sourav-jenkins-webapp:ver1" {
-  family = "souravraghuvanshi/sourav-jenkins-webapp:ver1"
-
-  container_definitions = <<EOF
-[
-  {
-    "name": "souravraghuvanshi/sourav-jenkins-webapp:ver1",
-    "image": "souravraghuvanshi/sourav-jenkins-webapp:ver1",
-    "cpu": 0,
-    "memory": 32,
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-        "awslogs-region": "us-east-1",
-        "awslogs-group": "souravraghuvanshi/sourav-jenkins-webapp:ver1",
-        "awslogs-stream-prefix": "complete-ecs"
-      }
-    }
+  ordered_placement_strategy {
+    type  = "binpack"
+    field = "cpu"
   }
-]
-EOF
+
+  load_balancer {
+    target_group_arn = "${aws_lb_target_group.foo.arn}"
+    container_name   = "mongo"
+    container_port   = 8080
+  }
+
+  placement_constraints {
+    type       = "memberOf"
+    expression = "attribute:ecs.availability-zone in [us-east-1]"
+  }
 }
-
-resource "aws_ecs_service" "souravraghuvanshi/sourav-jenkins-webapp:ver1" {
-  name            = "souravraghuvanshi/sourav-jenkins-webapp:ver1d"
-  cluster         = "${var.cluster_id}"
-  task_definition = "${aws_ecs_task_definition.souravraghuvanshi/sourav-jenkins-webapp:ver1.arn}"
-
-  desired_count = 1
-
-  deployment_maximum_percent         = 100
-  deployment_minimum_healthy_percent = 0
-}
- 
