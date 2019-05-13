@@ -34,25 +34,16 @@ node {
       rtMaven.run pom: 'pom.xml', goals: 'clean package sonar:sonar', buildInfo: buildInfo
     }
      } 
-  */
+
   stage('Build Docker image') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line 
-          */
+       
          sh 'sudo docker build -t sourav-jenkins-webapp:ver1 .'
      }
 
      stage('Push image') 
                              {
                                  
-                             /* Finally, we'll push the image with two tags:
-                                           * First, the incremental build number from Jenkins
-                                           * Second, the 'latest' tag.
-                                           * Pushing multiple tags is cheap, as all the layers are reused. 
-                                           
-                                          sudo docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-            sudo app.push("${env.BUILD_NUMBER}")
-            sudo app.push("latest")*/
+                             
             
            withCredentials([usernamePassword(credentialsId: 'docker-hub-raghuvanshi', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {
     // some block
@@ -65,6 +56,7 @@ sh 'sudo docker tag sourav-jenkins-webapp:ver1 souravraghuvanshi/sourav-jenkins-
 sh ' sudo docker push souravraghuvanshi/sourav-jenkins-webapp:ver1'
            }
 }
+  */
    stage('Build') {
     
 
@@ -77,7 +69,7 @@ sh ' sudo docker push souravraghuvanshi/sourav-jenkins-webapp:ver1'
       }
    }
                     
-         stage('connection') {   
+        /* stage('connection') {   
                
         sshagent(['SouravSec']) {
     
@@ -88,7 +80,7 @@ sh ' sudo docker push souravraghuvanshi/sourav-jenkins-webapp:ver1'
              sh 'ssh ubuntu@ec2-18-234-154-79.compute-1.amazonaws.com sudo docker run -d -p 8888:8888 --name=sourav souravraghuvanshi/sourav-jenkins-webapp:ver1'
             }      
             
-        }       
+        }  */     
    } 
           /*stage('docker pull') {
     
